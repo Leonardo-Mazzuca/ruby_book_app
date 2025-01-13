@@ -1,0 +1,25 @@
+<% content_for :title, "Rooms" %>
+
+<div class="w-full">
+  <% if notice.present? %>
+    <p class="py-2 px-3 bg-green-50 mb-5 text-green-500 font-medium rounded-md inline-block" id="notice"><%= notice %></p>
+  <% end %>
+
+    <h1 class="font-semibold text-2xl">My Rooms</h1>
+
+
+  <div id="rooms" class="min-w-full">
+
+    <% if current_user && current_user.rooms.any? %>
+
+      <% current_user.rooms.each do |room| %>
+
+           <%= render partial: 'rooms/room-card', locals: { room: room } %>
+      <% end %>
+      
+    <% else %>
+      <p class="text-center my-10">You have no rooms.</p>
+    <% end %>
+
+  </div>
+</div>

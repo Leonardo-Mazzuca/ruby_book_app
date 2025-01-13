@@ -1,0 +1,48 @@
+<%= form_with(model: booking, url: bookings_path, method: :post, local: true, class: "space-y-4") do |f| %>
+
+  <div>
+  <% if @room.present? %>
+    <%= f.hidden_field :room_id, value: @room.id %> 
+  <% end %>
+</div>
+
+    <% if @booking.errors.any? %>
+      <div class="errors">
+        <ul>
+          <% @booking.errors.full_messages.each do |message| %>
+            <li class="text-red-700 font-semibold"><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+
+  <div class="grid gap-5 md:grid-cols-2 my-3">
+
+    <div>
+      <%= f.label :check_in_date, "Check-in Date", class: "block font-medium" %>
+      <%= f.date_field :check_in_date, class: "border rounded-md w-full px-3 py-2", required: true %>
+    </div>
+
+    <div>
+      <%= f.label :check_out_date, "Check-out Date", class: "block font-medium" %>
+      <%= f.date_field :check_out_date, class: "border rounded-md w-full px-3 py-2", required: true %>
+    </div>
+
+      <div>
+      <%= f.label :check_in_time, "Check-in Time", class: "block font-medium" %>
+      <%= f.time_field :check_in_time, class: "border rounded-md w-full px-3 py-2", required: true %>
+    </div>
+
+    <div>
+      <%= f.label :check_out_time, "Check-out Time", class: "block font-medium" %>
+      <%= f.time_field :check_out_time, class: "border rounded-md w-full px-3 py-2", required: true %>
+    </div>
+
+  </div>
+
+  <div>
+    <%= f.submit request.path.include?('edit') ? "Save edit" : "Book this Room", class: "px-4 my-3 ms-auto py-2 bg-black text-white rounded-md hover:bg-zinc-800" %>
+  </div>
+
+<% end %>
